@@ -4,7 +4,7 @@ const InfoBoxes = () => {
   return (
     <div className='flex flex-col lg:flex-row gap-y-10 lg:gap-x-5 px-10 container mx-auto mt-14 justify-between'>
       <div className='text-center'>
-        <i class='bx bx-target-lock text-primary text-9xl'></i>
+        <i className='bx bx-target-lock text-primary text-9xl'></i>
         <h5 className='text-white text-2xl uppercase my-5'>targeting</h5>
         <p className="text-xl text-secondary-dark">
           You specifie which type <br />
@@ -13,7 +13,7 @@ const InfoBoxes = () => {
         </p>
       </div>
       <div className='text-center'>
-        <i class='bx bx-check-shield text-primary text-9xl'></i>
+        <i className='bx bx-check-shield text-primary text-9xl'></i>
         <h5 className='text-white text-2xl uppercase my-5'>reputation system</h5>
         <p className="text-xl text-secondary-dark">
           Reward or punish teammates <br />
@@ -22,7 +22,7 @@ const InfoBoxes = () => {
         </p>
       </div>
       <div className='text-center'>
-        <i class='bx bx-conversation text-primary text-9xl'></i>
+        <i className='bx bx-conversation text-primary text-9xl'></i>
         <h5 className='text-white text-2xl uppercase my-5'>converse</h5>
         <p className="text-xl text-secondary-dark">
           Discuss with other players <br />

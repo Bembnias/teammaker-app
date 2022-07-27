@@ -6,6 +6,8 @@ import LOL from './pages/LOL/LOL';
 import BrawlStars from './pages/BrawlStars/BrawlStars';
 import Landing from './pages/Landing/Landing';
 import RespectRanking from './pages/RespectRanking/RespectRanking';
+import Register from './pages/Register/Register';
+import Login from './pages/Login/Login';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route exact path='/league-of-legends' element={<LOL />} />
         <Route exact path='/brawl-stars' element={<BrawlStars />} />
         <Route exact path='/:game/respect-ranking' element={<RespectRanking />} />
+        <Route exact path='/register' element={<Register />} />
+        <Route exact path='/login' element={<Login />} />
       </Routes>
     </Router>
   );

@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 .button-primary {
-  @apply bg-primary uppercase text-center text-white font-semibold rounded-md px-5 py-2 items-center;
+  @apply bg-primary uppercase cursor-pointer text-center text-white font-semibold rounded-md px-5 py-2 items-center;
 }
 
 .button-secondary {
-  @apply bg-transparent uppercase text-center text-white font-semibold rounded-md px-5 py-2 items-center border-2 border-primary;
+  @apply bg-transparent uppercase cursor-pointer text-center text-white font-semibold rounded-md px-5 py-2 items-center border-2 border-primary;
 }
 
 .button-golden {
-  @apply bg-black uppercase text-center text-yellow font-semibold rounded-md px-5 py-2 items-center border-2 border-yellow;
+  @apply bg-black uppercase cursor-pointer text-center text-yellow font-semibold rounded-md px-5 py-2 items-center border-2 border-yellow;
 }
 
 .dark-radial-gradient {
@@ -63,6 +63,12 @@
   background-size: cover;
 }
 
+.bg-image-centered {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .sidebar-game-tile {
   @apply w-14 h-14 p-3 rounded-lg ease-in-out duration-300 hover:opacity-80;
 }
@@ -72,6 +78,18 @@
   -webkit-box-shadow: 0px 0px 10px 0px rgba(137, 44, 220, 1);
   -moz-box-shadow: 0px 0px 10px 0px rgba(137, 44, 220, 1);
   box-shadow: 0px 0px 10px 0px rgba(137, 44, 220, 1);
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.input-error {
+  @apply text-red hidden p-0.5;
+}
+
+input:invalid[focused="true"] ~ .input-error {
+  display: block;
 }
 
 /* Custom scroll-bar */
