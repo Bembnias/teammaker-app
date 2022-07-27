@@ -1,13 +1,96 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button-primary {
+  @apply bg-primary uppercase text-center text-white font-semibold rounded-md px-5 py-2 items-center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.button-secondary {
+  @apply bg-transparent uppercase text-center text-white font-semibold rounded-md px-5 py-2 items-center border-2 border-primary;
+}
+
+.button-golden {
+  @apply bg-black uppercase text-center text-yellow font-semibold rounded-md px-5 py-2 items-center border-2 border-yellow;
+}
+
+.dark-radial-gradient {
+  background: #000000BD;
+  background: -webkit-radial-gradient(center, #000000BD, #000000D6);
+  background: -moz-radial-gradient(center, #000000BD, #000000D6);
+  background: radial-gradient(ellipse at center, #000000BD, #000000D6);
+}
+
+.dark-radial-gradient-2nd {
+  background: #3F3F3F;
+  background: -webkit-radial-gradient(center, #3F3F3F, #2E2E2E);
+  background: -moz-radial-gradient(center, #3F3F3F, #2E2E2E);
+  background: radial-gradient(ellipse at center, #3F3F3F, #2E2E2E);
+}
+
+.dark-linear-gradient {
+  background: #1E1E1E;
+  background: -webkit-linear-gradient(bottom right, #1E1E1E, #0D0D0D);
+  background: -moz-linear-gradient(bottom right, #1E1E1E, #0D0D0D);
+  background: linear-gradient(to top left, #1E1E1E, #0D0D0D);
+}
+
+.landing-bg-image {
+  background-image: url('./img/esport.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.game-card-one {
+  background-image: url('./img/lol-main-image.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.game-card-two {
+  background-image: url('./img/csgo-main-image.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.game-card-three {
+  background-image: url('./img/bs-main-image.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.sidebar-game-tile {
+  @apply w-14 h-14 p-3 rounded-lg ease-in-out duration-300 hover:opacity-80;
+}
+
+.active-tile {
+  border: 2px solid #892CDC;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(137, 44, 220, 1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(137, 44, 220, 1);
+  box-shadow: 0px 0px 10px 0px rgba(137, 44, 220, 1);
+}
+
+/* Custom scroll-bar */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2E2E2E; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-primary rounded-full
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(107, 51, 156);
 }
