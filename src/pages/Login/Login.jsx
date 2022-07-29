@@ -1,18 +1,24 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import BSImage from '../../img/bs-wallpaper.jpg'
 import Logo from '../../img/teammaker-logo.svg'
+import { loginUser } from '../../api'
+
+import { setAuthInfo } from '../../redux/auth/authReducer'
+
 import FormInput from '../../components/FormInput'
+import Alert from '../../components/Alert'
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
-    confirmPassword: "",
-    birthday: "",
-    country: ""
   })
+  const [loading, setLoading] = useState(false)
+  const [alert, setAlert] = useState(null)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const inputsInfo = [
     {
@@ -36,10 +42,23 @@ const Login = () => {
     }
   ]
 
-  const onSubmit = (e) => {
-    console.log(formData)
-    
-    e.preventDefault();
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      setLoading(true)
+      const response = await loginUser(formData)
+      dispatch(setAuthInfo(response.data))
+      response.status === 200 && setAlert({ msg: "Successfuly logged in!", type: "green" })
+      response.status === 200 && setTimeout(() => {
+        navigate('/choose-a-game')
+      }, 1000)
+    } catch (error) {
+      setLoading(false)
+      setAlert({ msg: error.response.data, type: "red" })
+      setTimeout(() => {
+        setAlert(null)
+      }, 3500)
+    }
   };
 
   const onChange = (e) => {
@@ -47,7 +66,8 @@ const Login = () => {
   };
 
   return (
-    <div className='flex flex-row min-h-[calc(100vh-4rem)] w-full'>
+    <div className='relative flex flex-row min-h-[calc(100vh-4rem)] w-full'>
+      { alert && <Alert alertMsg={alert.msg} alertType={alert.type} /> }
       <section className='w-full lg:w-1/2 dark-linear-gradient'>
         <div className='w-2/3 mx-auto'>
           <h2 className='text-white text-center font-semibold text-4xl mt-5 lg:mt-10'>Sign in</h2>
@@ -60,7 +80,9 @@ const Login = () => {
                 onChange={onChange}
               />
             ))}
-            <input type="submit" className='button-primary w-full' value='Submit'/>
+            <button type="submit" className='button-primary w-full'>
+              {loading ? <span>Submit <i className='bx bx-loader-alt bx-spin'></i></span> : <span>Submit</span> }
+            </button>
             <Link to={'/register'}>
               <p className='text-secondary-dark text-sm text-right mt-2'>Don't have an account? <span className="text-primary">Create new one</span> here</p>
             </Link>

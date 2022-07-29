@@ -1,19 +1,30 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import LolImage from '../../img/lol-wallpaper.png'
 import Logo from '../../img/teammaker-logo.svg'
 import countries from './countryList'
+import { registerUser } from '../../api'
+
+import { setAuthInfo } from '../../redux/auth/authReducer'
+
 import FormInput from '../../components/FormInput'
+import Alert from '../../components/Alert'
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
+    username: "",
     confirmPassword: "",
     birthday: "",
     country: ""
   })
+  const [alert, setAlert] = useState(null)
+  const [loading, setLoading] = useState(false)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const inputsInfo = [
     {
@@ -57,9 +68,25 @@ const Register = () => {
     },
   ]
 
-  const onSubmit = (e) => {
-    console.log(formData)
-    e.preventDefault();
+  let { confirmPassword, ...userCredentials } = formData
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      setLoading(true)
+      const response = await registerUser(userCredentials)
+      dispatch(setAuthInfo(response.data))
+      response.status === 201 && setAlert({ msg: "Account created!", type: "green" })
+      response.status === 201 && setTimeout(() => {
+        navigate('/choose-a-game')
+      }, 1000)
+    } catch (error) {
+      setLoading(false)
+      setAlert({ msg: error.response.data, type: "red" })
+      setTimeout(() => {
+        setAlert(null)
+      }, 3500)
+    }
   };
 
   const onChange = (e) => {
@@ -67,7 +94,8 @@ const Register = () => {
   };
 
   return (
-    <div className='flex flex-row h-full lg:min-h-[calc(100vh-4rem)] w-full'>
+    <div className='relative flex flex-row h-full lg:min-h-[calc(100vh-4rem)] w-full'>
+      { alert && <Alert alertMsg={alert.msg} alertType={alert.type} /> }
       <section className='w-full lg:w-1/2 dark-linear-gradient'>
         <div className='w-2/3 mx-auto'>
           <h2 className='text-white text-center font-semibold text-4xl mt-5 lg:mt-10'>Create an account</h2>
@@ -94,7 +122,9 @@ const Register = () => {
                 </select>
               </div>
             </div>
-            <input type="submit" className='button-primary w-full' value='Submit'/>
+            <button type="submit" className='button-primary w-full'>
+              {loading ? <span>Submit <i className='bx bx-loader-alt bx-spin'></i></span> : <span>Submit</span> }
+            </button>
             <Link to={'/login'}>
               <p className='text-secondary-dark text-sm text-right mt-2'>Already have an account? <span className="text-primary">Login</span> here</p>
             </Link>

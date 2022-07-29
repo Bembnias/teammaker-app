@@ -12,6 +12,7 @@ const Sidebar = () => {
   const { pathname } = location
 
   const game = useSelector(state => state.gamesReducer.game)
+  const user = useSelector(state => state.authReducer.userInfo)
   const dispatch = useDispatch()
   
   return (
@@ -63,7 +64,7 @@ const Sidebar = () => {
           <p className="mt-4 text-2xl font-semibold">XY</p>
         </div>
         <div className='flex flex-col'>
-          <span className='text-white'>Xavier Yoshi</span>
+          <span className='text-white'>{user ? user.username : ''}</span>
           <span className='text-secondary-dark'>RPX: <span className='text-primary'>4570</span></span>
           <div className='flex flex-row gap-x-2'>
             <span className='text-secondary-dark uppercase'>Rank: </span>

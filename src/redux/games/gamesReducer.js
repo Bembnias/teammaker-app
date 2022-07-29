@@ -20,7 +20,6 @@ export const gamesSlice = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { pickCsgo, pickLol, pickBrawlstars } = gamesSlice.actions
 
 export default gamesSlice.reducer
