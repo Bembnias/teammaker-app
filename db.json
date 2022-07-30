@@ -1,20 +1,33 @@
 {
   "users": [
     {
-      "email": "ipear@poczta.fm",
-      "password": "$2a$10$0ImCJW5NevTU4BQhghUhheFuDU7O9VU8Hw4fBlGENHI7F0L9dDkj6",
-      "username": "Bieniasolo",
-      "birthday": "2001-04-05",
-      "country": "Poland",
-      "id": 1
-    },
-    {
       "email": "BieniasMt@gmail.com",
-      "password": "$2a$10$3.0/mj3D7RijZrXdFwjNMuqDzpR2wE7V1Wf.vb6j2uVHp6qfIVi8u",
+      "password": "$2a$10$yW7LkvziL/GlwpCIfq8KBOX1bh9TlFsLEC/cG85pNTZxh6Vbvqeae",
       "username": "Bieniasolo",
       "birthday": "2001-04-05",
       "country": "Poland",
-      "id": 2
+      "respectPoints": 0,
+      "games": [
+        {
+          "name": "league-of-legends",
+          "leagueOfLegends": null,
+          "rank": "Platinum",
+          "inGameNick": null
+        },
+        {
+          "name": "cs-go",
+          "counterStrike": null,
+          "rank": "Supreme",
+          "inGameNick": "XavierX"
+        },
+        {
+          "name": "brawl-stars",
+          "brawlStars": null,
+          "rank": 4200,
+          "inGameNick": "#543JXZ93"
+        }
+      ],
+      "id": 1
     }
   ]
 }

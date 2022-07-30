@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import LolLogo from '../img/lol-logo.png'
 import CSGOLogo from '../img/csgo-logo.png'
 import BSLogo from '../img/bs-logo.png'
-import SupremeRank from '../img/csgo-ranks/SUPREME.png'
 import { pickBrawlstars, pickCsgo, pickLol } from '../redux/games/gamesReducer'
+
+import GameConnectBtn from './GameConnectBtn'
 
 const Sidebar = () => {
   const location = useLocation()
@@ -14,7 +15,7 @@ const Sidebar = () => {
   const game = useSelector(state => state.gamesReducer.game)
   const user = useSelector(state => state.authReducer.userInfo)
   const dispatch = useDispatch()
-  
+
   return (
     <aside className='hidden lg:flex flex-col sticky top-16 lg:min-w-80 px-6 h-[calc(100vh-4rem)]' style={{backgroundColor: "#171717"}}>
       
@@ -33,9 +34,7 @@ const Sidebar = () => {
 
       {/* @ BUTTON GROUP @ */}
       <div className='flex flex-col mt-8 gap-y-5'>
-        <div className="button-golden">
-          connect acc <i className='bx bxl-steam'></i>
-        </div>
+        <GameConnectBtn game={game} />
         <div className="button-primary">create lobby</div>
         <div className="button-secondary">
           mix team: <span className='text-primary'>317</span> <i className='bx bxs-user'></i>
@@ -60,19 +59,26 @@ const Sidebar = () => {
 
       {/* @ SIDENAV BUTTON GROUP */}
       <div className='absolute bottom-8 flex flex-row gap-x-3 items-center'>
-        <div className='w-16 h-16 text-white bg-primary text-center rounded-lg'>
-          <p className="mt-4 text-2xl font-semibold">XY</p>
-        </div>
-        <div className='flex flex-col'>
-          <span className='text-white'>{user ? user.username : ''}</span>
-          <span className='text-secondary-dark'>RPX: <span className='text-primary'>4570</span></span>
-          <div className='flex flex-row gap-x-2'>
-            <span className='text-secondary-dark uppercase'>Rank: </span>
-            <div className='w-14'>
-              <img title='Supreme' className='w-full' src={SupremeRank} alt="cs-go supreme rank" />
-            </div>
-          </div>
-        </div>
+        { !user
+          ? <span></span>
+          : <>
+              <div className='w-16 h-16 text-white bg-primary text-center rounded-lg'>
+                <p className="mt-4 text-2xl font-semibold">XY</p>
+              </div>
+              <div className='flex flex-col'>
+                <span className='text-white'>{ user ? user.username : '' }</span>
+                <span className='text-secondary-dark'>RPX: <span className='text-primary'>{ user ? user.respectPoints : '' }</span></span>
+                <div className='flex flex-row gap-x-2'>
+                  <span className='text-secondary-dark uppercase'>Rank: </span>
+                  { user.games.map(item => item.name === game && 
+                    <div key={item.name} className='w-14 flex justify-center'>
+                      <span className='text-primary'>{item.rank}</span>
+                    </div>)
+                  }
+                </div>
+              </div>
+            </>  
+        }
       </div>
 
     </aside>

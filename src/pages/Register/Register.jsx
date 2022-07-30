@@ -68,7 +68,17 @@ const Register = () => {
     },
   ]
 
+  // Configure account before creation ( !move to backend on production! )
   let { confirmPassword, ...userCredentials } = formData
+  userCredentials = {
+    ...userCredentials,
+    respectPoints: 0,
+    games: [
+      { leagueOfLegends: null },
+      { counterStrike: null },
+      { brawlStars: null }
+    ]
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault()
